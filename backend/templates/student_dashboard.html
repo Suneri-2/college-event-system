@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #4B0082, #00796B);
+            color: black;
+        }
+
+        header {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px 40px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 28px;
+            letter-spacing: 1px;
+            color: #fff;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        .container {
+            padding: 30px 50px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Stats section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background-color: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            color: black;
+            font-weight: bold;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.5);
+        }
+
+        .card h2 {
+            font-size: 48px;
+            margin: 0 0 10px;
+            color: #fff;
+            text-shadow: 2px 2px 4px black;
+        }
+
+        .card p {
+            font-size: 18px;
+            color: #fff;
+        }
+
+        /* Navigation buttons */
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            background: linear-gradient(to right, #00796B, #4B0082);
+            color: black;
+            font-weight: bold;
+            padding: 18px 30px;
+            border-radius: 12px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .nav-buttons a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            margin-top: 50px;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        @media(max-width: 600px){
+            .card h2 { font-size: 36px; }
+            .card p { font-size: 16px; }
+            .nav-buttons a { padding: 14px 20px; font-size: 14px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    Welcome, {{ session['user_name'] }} - Student Panel
+</header>
+
+<div class="container">
+
+    <!-- Stats Cards -->
+    <div class="stats">
+        <div class="card">
+            <h2>{{ events|length }}</h2>
+            <p>Total Events</p>
+        </div>
+        <div class="card">
+            <h2>{{ notifications|length }}</h2>
+            <p>Notifications</p>
+        </div>
+        <div class="card">
+            <h2>{{ announcements|length }}</h2>
+            <p>Announcements</p>
+        </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+        <a href="{{ url_for('student_events') }}">Events</a>
+        <a href="{{ url_for('student_notifications') }}">Notifications</a>
+        <a href="{{ url_for('student_announcements') }}">Announcements</a>
+        <a href="{{ url_for('student_reports') }}">Reports</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+
+</div>
+
+<footer>
+    &copy; 2026 College Event System. All rights reserved.
+</footer>
+
+</body>
+</html>
